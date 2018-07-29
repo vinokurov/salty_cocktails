@@ -31,7 +31,7 @@ class CocktailClassDetails(EmbeddedDocument):
     hours_per_session = FloatField()
 
 
-class CocktailRecipe(Document):
+class Cocktail(Document):
     "A course definition"
     title = StringField(max_length=200, required=True, unique=True)
     date_modified = DateTimeField(default=datetime.datetime.utcnow)
@@ -42,18 +42,11 @@ class CocktailRecipe(Document):
 
 ########################################################################################################################
 
-class Cocktail(Document):
-    "A course that is about to happen"
-    cocktail_recipe = ReferenceField(CocktailRecipe)
-    start_date = DateTimeField()
-    end_date = DateTimeField()
-
-
-########################################################################################################################
-
 class CocktailsMenu(Document):
+    "Cocktails that are offered for a date"
     cocktails = ListField(ReferenceField(Cocktail))
     start_date = DateTimeField()
+    end_date = DateTimeField()
 
 ########################################################################################################################
 
